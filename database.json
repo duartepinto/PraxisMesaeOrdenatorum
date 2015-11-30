@@ -1,0 +1,9 @@
+{"praxistas":[
+	{"name":"Quina", "hierarquia":"SEMI_PUTO", "primeiraMatricula":"2014", "dataNascimento":"2013-05-11"},
+	{"name":"Smurf", "hierarquia":"SEMI_PUTO", "primeiraMatricula":"2014", "dataNascimento":"2013-05-11"},
+	{"name":"SPDE", "hierarquia":"SEMI_PUTO", "primeiraMatricula":"2014", "dataNascimento":"2013-05-11"},
+	{"name":"CC", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"1994-12-15"},
+	{"name":"Pipoca", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"},
+	{"name":"Pauta", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"},
+	{"name":"Poncho", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"},
+]}
