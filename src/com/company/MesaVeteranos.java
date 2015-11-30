@@ -13,6 +13,14 @@ public class MesaVeteranos {
     private ArrayList<Praxista> veteranos;
     private ArrayList<Praxista> disposicaoMesaVets;
 
+    public MesaVeteranos(ArrayList<Praxista> veteranos){
+        this.veteranos = veteranos;
+    }
+
+    public MesaVeteranos(){
+        this.veteranos = new ArrayList<Praxista>();
+    }
+
     public boolean addVeterano(Praxista veterano){
         if(veterano.getHierarquia().ordinal() < Hierarquia.VETERANO.ordinal()){
             return false;

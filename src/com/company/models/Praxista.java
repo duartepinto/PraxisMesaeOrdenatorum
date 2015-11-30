@@ -79,7 +79,7 @@ public class Praxista implements Comparable {
             if(this.primeiraMatricula == p2.primeiraMatricula)
                 return this.dataNascimento.compareTo(p2.dataNascimento);
             else
-                if (this.primeiraMatricula > p2.primeiraMatricula)
+                if (this.primeiraMatricula < p2.primeiraMatricula)
                     return 1;
                 else
                     return -1;
