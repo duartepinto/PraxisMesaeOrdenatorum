@@ -9,9 +9,9 @@ public class Main {
 
 
     public static void main(String[] args) {
+        ParseJSON parser = new ParseJSON("database.json");
 
-
-        ArrayList<Praxista> praxistas = new ArrayList<Praxista>();
+        ArrayList<Praxista> praxistas = parser.unserialize();
         Ordenador ordenador = new Ordenador(praxistas);
 
         ordenador.display();

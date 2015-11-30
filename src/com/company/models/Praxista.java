@@ -77,7 +77,7 @@ public class Praxista implements Comparable {
 
         if(this.hierarquia.ordinal() == p2.hierarquia.ordinal()){
             if(this.primeiraMatricula == p2.primeiraMatricula)
-                return this.dataNascimento.compareTo(p2.dataNascimento);
+                return p2.dataNascimento.compareTo(this.dataNascimento);
             else
                 if (this.primeiraMatricula < p2.primeiraMatricula)
                     return 1;
