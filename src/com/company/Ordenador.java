@@ -75,6 +75,7 @@ public class Ordenador {
 
                     System.out.print(nome);
                 }
+                System.out.print('\n');
             }
         }else{
             for(int i = 0; i < rightRow.size(); i++){
@@ -91,24 +92,28 @@ public class Ordenador {
                     System.out.print(" ");
 
                 System.out.print(nome);
-
+                System.out.print('\n');
             }
         }
     }
 
-    private void displayMesaVeteranos(ArrayList<Praxista> mesaVeteranos, int espaçamentoInicial){
+    private void displayMesaVeteranos(ArrayList<Praxista> mesaVeteranos, int espacamentoInicial){
 
+        for(int i = 0; i < espacamentoInicial; i++)
+            System.out.print(" ");
         for (Praxista veterano : mesaVeteranos){
-            for(int i = 0; i < espaçamentoInicial; i++)
-                System.out.print(" ");
             System.out.print(veterano.getNome() + " ");
         }
+        System.out.print('\n');
     }
 
     public void display(){
         ArrayList<Praxista> mesaVeteranos = this.mesaVets.geraMesa();
+
         Collections.sort(leftRow);
+        Collections.reverse(leftRow);
         Collections.sort(rightRow);
+        Collections.reverse(rightRow);
         int tamanhoMesaVets = this.mesaVets.mesaLength();
         int espacamentoInicial = this.maiorNome(leftRow) / 2;
         displayMesaVeteranos(mesaVeteranos, espacamentoInicial);

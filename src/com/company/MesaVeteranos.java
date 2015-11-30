@@ -15,10 +15,12 @@ public class MesaVeteranos {
 
     public MesaVeteranos(ArrayList<Praxista> veteranos){
         this.veteranos = veteranos;
+        this.disposicaoMesaVets = new ArrayList<Praxista>();
     }
 
     public MesaVeteranos(){
         this.veteranos = new ArrayList<Praxista>();
+        this.disposicaoMesaVets = new ArrayList<Praxista>();
     }
 
     public boolean addVeterano(Praxista veterano){
@@ -32,7 +34,7 @@ public class MesaVeteranos {
 
     public ArrayList<Praxista> geraMesa(){
         Collections.sort(veteranos);
-
+        Collections.reverse(veteranos);
         disposicaoMesaVets.clear();
         for (int i = 0; i < veteranos.size(); i++){
             if(i % 2 == 0){
