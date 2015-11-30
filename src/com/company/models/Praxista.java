@@ -9,11 +9,21 @@ public class Praxista implements Comparable {
     private Hierarquia hierarquia;
     private String nome;
     private Date dataNascimento;
+    private int primeiraMatricula;
 
-    public Praxista(Hierarquia hierarquia, String nome, Date dataNascimento){
+    public Praxista(Hierarquia hierarquia, String nome, int primeiraMatricula ,Date dataNascimento){
         this.setDataNascimento(dataNascimento);
         this.setHierarquia(hierarquia);
         this.setNome(nome);
+        this.primeiraMatricula = primeiraMatricula;
+    }
+
+    public int getPrimeiraMatricula() {
+        return primeiraMatricula;
+    }
+
+    public void setPrimeiraMatricula(int primeiraMatricula) {
+        this.primeiraMatricula = primeiraMatricula;
     }
 
 
@@ -66,7 +76,13 @@ public class Praxista implements Comparable {
         Praxista p2 = (Praxista) o;
 
         if(this.hierarquia.ordinal() == p2.hierarquia.ordinal()){
-            return this.dataNascimento.compareTo(p2.dataNascimento);
+            if(this.primeiraMatricula == p2.primeiraMatricula)
+                return this.dataNascimento.compareTo(p2.dataNascimento);
+            else
+                if (this.primeiraMatricula > p2.primeiraMatricula)
+                    return 1;
+                else
+                    return -1;
         }else{
             if(this.hierarquia.ordinal() > p2.hierarquia.ordinal()){
                 return 1;
