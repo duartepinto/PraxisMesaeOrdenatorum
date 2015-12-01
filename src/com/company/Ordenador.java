@@ -25,7 +25,6 @@ public class Ordenador {
 
     JPanel panel = new JPanel(new FlowLayout());
     JFrame frame = new JFrame("Praxis Mesae Ordenatorum");
-    JLabel rowLabel;
 
     JPanel left = new JPanel();
     JPanel right = new JPanel();
@@ -137,7 +136,6 @@ public class Ordenador {
     }
 
     private void initComponents() {
-        //readImages();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -145,16 +143,33 @@ public class Ordenador {
         panel.setLayout(null);
 
         for (int i = 0; i < leftRow.size(); i = i + 1) {
-            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
-            rowLabel = new JLabel(image);
-            rowLabel.setBounds(300,i*image.getIconHeight() + 100, image.getIconWidth(), image.getIconHeight());
+            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+            JLabel rowLabel = new JLabel(image);
+            rowLabel.setBounds(200,i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+
+            JLabel nome = new JLabel(leftRow.get(i).getNome());
+            nome.setBounds(100,i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+
+            panel.add(nome);
             panel.add(rowLabel);
         }
 
         for (int i = 0; i < rightRow.size(); i = i + 1) {
-            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
-            rowLabel = new JLabel(image);
-            rowLabel.setBounds(1300,i*image.getIconHeight() + 100, image.getIconWidth(), image.getIconHeight());
+            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+            JLabel rowLabel = new JLabel(image);
+            rowLabel.setBounds(200 + (mesaVets.getVeteranos().size() + 1) * image.getIconWidth(),i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+
+            JLabel nome = new JLabel(rightRow.get(i).getNome());
+            nome.setBounds(425 + (mesaVets.getVeteranos().size() + 1) * image.getIconWidth(),i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+
+            panel.add(nome);
+            panel.add(rowLabel);
+        }
+
+        for (int i = 0; i < mesaVets.getVeteranos().size(); i++) {
+            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
+            JLabel rowLabel = new JLabel(image);
+            rowLabel.setBounds(350 + i * image.getIconWidth(), 100, image.getIconWidth(), image.getIconHeight());
             panel.add(rowLabel);
         }
 
@@ -163,11 +178,5 @@ public class Ordenador {
         frame.setVisible(true);
     }
 
-    private void readImages() {
-
-        ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
-        rowLabel = new JLabel(image);
-        rowLabel.setBounds(300, 400, 100, 100);
-    }
 
 }

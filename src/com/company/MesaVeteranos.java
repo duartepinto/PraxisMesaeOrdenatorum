@@ -55,4 +55,8 @@ public class MesaVeteranos {
         length += veteranos.size() -1;
         return length;
     }
+
+    public ArrayList<Praxista> getVeteranos() {
+        return veteranos;
+    }
 }
