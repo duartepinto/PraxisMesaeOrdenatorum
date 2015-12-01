@@ -3,6 +3,12 @@ package com.company;
 import com.company.models.Hierarquia;
 import com.company.models.Praxista;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -16,6 +22,14 @@ public class Ordenador {
     private ArrayList<Praxista> rightRow;
 
     private MesaVeteranos mesaVets;
+
+    JPanel panel = new JPanel(new FlowLayout());
+    JFrame frame = new JFrame("Praxis Mesae Ordenatorum");
+    JLabel rowLabel;
+
+    JPanel left = new JPanel();
+    JPanel right = new JPanel();
+    JPanel mid = new JPanel();
 
     Ordenador(ArrayList<Praxista> praxistas){
         this.praxistas = praxistas;
@@ -118,5 +132,35 @@ public class Ordenador {
         int espacamentoInicial = this.maiorNome(leftRow) / 2;
         displayMesaVeteranos(mesaVeteranos, espacamentoInicial);
         displayRows(tamanhoMesaVets, espacamentoInicial);
+
+        initComponents();
     }
+
+    private void initComponents() {
+        //readImages();
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        panel = (JPanel)frame.getContentPane();
+        panel.setLayout(null);
+
+        for (int i = 0; i < leftRow.size(); i = i + 1) {
+            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
+            rowLabel = new JLabel(image);
+            rowLabel.setBounds(300,i*100 + image.getIconHeight(), image.getIconWidth(), image.getIconHeight());
+            panel.add(rowLabel);
+        }
+
+        frame.setBounds(0, 0, 1920, 1080);
+
+        frame.setVisible(true);
+    }
+
+    private void readImages() {
+
+        ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
+        rowLabel = new JLabel(image);
+        rowLabel.setBounds(300, 400, 100, 100);
+    }
+
 }
