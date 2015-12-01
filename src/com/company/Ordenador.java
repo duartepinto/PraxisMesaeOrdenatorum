@@ -147,7 +147,14 @@ public class Ordenador {
         for (int i = 0; i < leftRow.size(); i = i + 1) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
             rowLabel = new JLabel(image);
-            rowLabel.setBounds(300,i*100 + image.getIconHeight(), image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(300,i*image.getIconHeight() + 100, image.getIconWidth(), image.getIconHeight());
+            panel.add(rowLabel);
+        }
+
+        for (int i = 0; i < rightRow.size(); i = i + 1) {
+            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table.jpg"));
+            rowLabel = new JLabel(image);
+            rowLabel.setBounds(1300,i*image.getIconHeight() + 100, image.getIconWidth(), image.getIconHeight());
             panel.add(rowLabel);
         }
 
