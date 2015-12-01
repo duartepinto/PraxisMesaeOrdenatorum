@@ -23,6 +23,8 @@ public class Ordenador {
 
     private MesaVeteranos mesaVets;
 
+    final int espacamento_doutores = 300;
+
     JPanel panel = new JPanel(new FlowLayout());
     JFrame frame = new JFrame("Praxis Mesae Ordenatorum");
 
@@ -145,10 +147,10 @@ public class Ordenador {
         for (int i = 0; i < leftRow.size(); i = i + 1) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
             JLabel rowLabel = new JLabel(image);
-            rowLabel.setBounds(200,i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(150,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             JLabel nome = new JLabel(leftRow.get(i).getNome());
-            nome.setBounds(100,i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+            nome.setBounds(50,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             panel.add(nome);
             panel.add(rowLabel);
@@ -156,11 +158,14 @@ public class Ordenador {
 
         for (int i = 0; i < rightRow.size(); i = i + 1) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+
+            ImageIcon imageVet = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
+
             JLabel rowLabel = new JLabel(image);
-            rowLabel.setBounds(200 + (mesaVets.getVeteranos().size() + 1) * image.getIconWidth(),i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(225 + (mesaVets.getVeteranos().size() + 1) * imageVet.getIconWidth(),i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             JLabel nome = new JLabel(rightRow.get(i).getNome());
-            nome.setBounds(425 + (mesaVets.getVeteranos().size() + 1) * image.getIconWidth(),i*image.getIconHeight() + 250, image.getIconWidth(), image.getIconHeight());
+            nome.setBounds(450 + (mesaVets.getVeteranos().size() + 1) * imageVet.getIconWidth(),i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             panel.add(nome);
             panel.add(rowLabel);
@@ -169,7 +174,12 @@ public class Ordenador {
         for (int i = 0; i < mesaVets.getVeteranos().size(); i++) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
             JLabel rowLabel = new JLabel(image);
-            rowLabel.setBounds(350 + i * image.getIconWidth(), 100, image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(350 + i * image.getIconWidth(), 125, image.getIconWidth(), image.getIconHeight());
+
+            JLabel nome = new JLabel(mesaVets.getDisposicaoMesaVets().get(i).getNome());
+            nome.setBounds(375 + i * image.getIconWidth(), 0, image.getIconWidth(), image.getIconHeight());
+
+            panel.add(nome);
             panel.add(rowLabel);
         }
 

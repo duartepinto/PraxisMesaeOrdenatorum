@@ -59,4 +59,8 @@ public class MesaVeteranos {
     public ArrayList<Praxista> getVeteranos() {
         return veteranos;
     }
+
+    public ArrayList<Praxista> getDisposicaoMesaVets() {
+        return disposicaoMesaVets;
+    }
 }
