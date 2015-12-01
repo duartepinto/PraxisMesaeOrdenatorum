@@ -169,7 +169,7 @@ public class ParseJSON {
             return year + "-" + month + "-" + day;
     }
 
-    private Hierarquia parseHierarquia(String hierarq) throws JSONException {
+    public static Hierarquia parseHierarquia(String hierarq) throws JSONException {
         switch(hierarq){
             case "SEGUNDANISTA":
                 return SEGUNDANISTA;
