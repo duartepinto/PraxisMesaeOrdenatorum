@@ -303,7 +303,9 @@ public class Ordenador {
                                 ParseJSON parse = new ParseJSON("database.json");
                                 parse.serialize(praxistas);
                                 //voltar a ler o JSON
-                                praxistas = parse.unserialize();
+                                praxistas = parse.unserialize(); // Eu meti isto aqui, mas nao e preciso porque a lista
+                                                                // ja nao tem o praxista adicionado, podes tirar isto
+                                                                // se nao precisares para mais nada
                             }
                         }
                     }
@@ -358,7 +360,14 @@ public class Ordenador {
                                 Praxista novo = getPraxistaByName(textDoutor.getText());
 
                                 //remover novo ao JSON
+                                praxistas.remove(novo);
+                                ParseJSON parse = new ParseJSON("database.json");
+                                parse.serialize(praxistas);
+
                                 //voltar a ler o JSON
+                                praxistas = parse.unserialize(); // Eu meti isto aqui, mas nao e preciso porque a lista
+                                                                // ja nao tem o praxista removido, podes tirar isto
+                                                                // se nao precisares para mais nada
                                 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Este praxista não existe.");
