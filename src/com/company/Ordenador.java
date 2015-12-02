@@ -2,17 +2,12 @@ package com.company;
 
 import com.company.models.Hierarquia;
 import com.company.models.Praxista;
-import oracle.jrockit.jfr.JFR;
 import org.json.JSONException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -304,7 +299,13 @@ public class Ordenador {
 
                                 Praxista novo = new Praxista(hier, nome, matricula, data);
                                 //adicionar novo ao JSON
+                                praxistas.add(novo);
+                                ParseJSON parse = new ParseJSON("database.json");
+                                parse.serialize(praxistas);
                                 //voltar a ler o JSON
+                                praxistas = parse.unserialize(); // Eu meti isto aqui, mas nao e preciso porque a lista
+                                                                // ja nao tem o praxista adicionado, podes tirar isto
+                                                                // se nao precisares para mais nada
                             }
                         }
                     }
@@ -359,7 +360,14 @@ public class Ordenador {
                                 Praxista novo = getPraxistaByName(textDoutor.getText());
 
                                 //remover novo ao JSON
+                                praxistas.remove(novo);
+                                ParseJSON parse = new ParseJSON("database.json");
+                                parse.serialize(praxistas);
+
                                 //voltar a ler o JSON
+                                praxistas = parse.unserialize(); // Eu meti isto aqui, mas nao e preciso porque a lista
+                                                                // ja nao tem o praxista removido, podes tirar isto
+                                                                // se nao precisares para mais nada
                                 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Este praxista não existe.");
