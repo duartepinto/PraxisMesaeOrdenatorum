@@ -34,6 +34,17 @@ public class Ordenador {
 
     final int espacamento_doutores = 300;
 
+    final double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    final double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+
+    int tamanhoMesaVetWidth = 0;
+    int tamanhoMesaVetHeight = 0;
+    int tamanhoMesaDotHeight = 0;
+    int tamanhoMesaDotWidth = 0;
+
+    int mesaVetY = 125;
+    int mesaEsquerda = 150;
+
     JPanel panel = new JPanel(new FlowLayout());
     JFrame frame = new JFrame("Praxis Mesae Ordenatorum");
     JFrame addFrame = new JFrame("Add Doutor");
@@ -156,9 +167,19 @@ public class Ordenador {
         addFrame.setBounds(400, 200, 1000, 800);
 
         deleteFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        deleteFrame.setBounds(500, 500, 500, 500);
+        deleteFrame.setBounds(400, 200, 1000, 800);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+        image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/10, Image.SCALE_SMOOTH));
+        tamanhoMesaDotWidth = image.getIconWidth();
+        tamanhoMesaDotHeight = image.getIconHeight();
+
+        image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
+        image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/10, Image.SCALE_SMOOTH));
+        tamanhoMesaVetWidth = image.getIconWidth();
+        tamanhoMesaVetHeight = image.getIconHeight();
 
         panel = (JPanel)frame.getContentPane();
         panel.setLayout(null);
@@ -171,7 +192,7 @@ public class Ordenador {
 
         configButtons();
 
-        frame.setBounds(0, 0, 1920, 1080);
+        frame.setBounds(0, 0, (int) width, (int) height);
 
         frame.setVisible(true);
     }
@@ -179,11 +200,12 @@ public class Ordenador {
     public void addLeftRow() {
         for (int i = 0; i < leftRow.size(); i = i + 1) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+            image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/10, Image.SCALE_SMOOTH));
             JLabel rowLabel = new JLabel(image);
-            rowLabel.setBounds(150,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(mesaEsquerda,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             JLabel nome = new JLabel(leftRow.get(i).getNome());
-            nome.setBounds(50,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
+            nome.setBounds(mesaEsquerda - 100,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             panel.add(nome);
             panel.add(rowLabel);
@@ -193,14 +215,14 @@ public class Ordenador {
     public void addRightRow() {
         for (int i = 0; i < rightRow.size(); i = i + 1) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+            image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/10, Image.SCALE_SMOOTH));
 
-            ImageIcon imageVet = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
 
             JLabel rowLabel = new JLabel(image);
-            rowLabel.setBounds(225 + (mesaVets.getVeteranos().size() + 1) * imageVet.getIconWidth(),i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(mesaEsquerda + (mesaVets.getVeteranos().size()+1) * tamanhoMesaVetWidth,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             JLabel nome = new JLabel(rightRow.get(i).getNome());
-            nome.setBounds(450 + (mesaVets.getVeteranos().size() + 1) * imageVet.getIconWidth(),i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
+            nome.setBounds(mesaEsquerda + image.getIconWidth() + 25 + (mesaVets.getVeteranos().size() + 1) * tamanhoMesaVetWidth,i*image.getIconHeight() + espacamento_doutores, image.getIconWidth(), image.getIconHeight());
 
             panel.add(nome);
             panel.add(rowLabel);
@@ -210,11 +232,13 @@ public class Ordenador {
     public void addCenterRow() {
         for (int i = 0; i < mesaVets.getVeteranos().size(); i++) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
+            image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/10, Image.SCALE_SMOOTH));
+
             JLabel rowLabel = new JLabel(image);
-            rowLabel.setBounds(350 + i * image.getIconWidth(), 125, image.getIconWidth(), image.getIconHeight());
+            rowLabel.setBounds(mesaEsquerda + tamanhoMesaDotWidth + i * image.getIconWidth(), mesaVetY, image.getIconWidth(), image.getIconHeight());
 
             JLabel nome = new JLabel(mesaVets.getDisposicaoMesaVets().get(i).getNome());
-            nome.setBounds(375 + i * image.getIconWidth(), 0, image.getIconWidth(), image.getIconHeight());
+            nome.setBounds((mesaEsquerda + tamanhoMesaDotWidth + 25) + i * image.getIconWidth(), mesaVetY - 100, image.getIconWidth(), image.getIconHeight());
 
             panel.add(nome);
             panel.add(rowLabel);
@@ -253,7 +277,7 @@ public class Ordenador {
                     public void actionPerformed(ActionEvent e) {
 
                         if (textDoutor.getText().equals("") || ageDoutor.getText().equals("") || matriDoutor.getText().equals("") || hierDoutor.getText().equals("")) {
-                            System.out.println("Campo vazio.");
+                            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
                         }
                         else {
 
@@ -280,19 +304,20 @@ public class Ordenador {
 
                                 Praxista novo = new Praxista(hier, nome, matricula, data);
                                 //adicionar novo ao JSON
+                                //voltar a ler o JSON
                             }
                         }
                     }
                 });
 
                 nomeDoutor.setBounds(100, 100, 400, 30);
-                textDoutor.setBounds(400, 100, 100, 30);
+                textDoutor.setBounds(600, 100, 100, 30);
                 idadeDoutor.setBounds(100, 200, 400, 30);
-                ageDoutor.setBounds(400, 200, 100, 30);
+                ageDoutor.setBounds(600, 200, 100, 30);
                 matriculaDoutor.setBounds(100, 300, 400, 30);
-                matriDoutor.setBounds(400, 300, 100, 30);
+                matriDoutor.setBounds(600, 300, 100, 30);
                 hierarqDoutor.setBounds(100, 400, 400, 30);
-                hierDoutor.setBounds(400, 400, 100, 30);
+                hierDoutor.setBounds(600, 400, 100, 30);
 
                 adicionar.setBounds(250, 500, 200, 50);
 
@@ -314,6 +339,44 @@ public class Ordenador {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
+                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar");
+
+                JTextField textDoutor = new JTextField();
+
+                JButton remover = new JButton("Eliminar");
+
+                remover.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        if (textDoutor.getText().equals("")) {
+                            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
+                        }
+                        else {
+                            if (searchPraxista(textDoutor.getText())) {
+                                Praxista novo = getPraxistaByName(textDoutor.getText());
+
+                                //remover novo ao JSON
+                                //voltar a ler o JSON
+                                
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Este praxista não existe.");
+                            }
+                        }
+                    }
+                });
+
+                nomeDoutor.setBounds(100, 100, 400, 30);
+                textDoutor.setBounds(600, 100, 100, 30);
+                remover.setBounds(250, 500, 200, 50);
+
+                deleteFrame.add(nomeDoutor);
+                deleteFrame.add(textDoutor);
+                deleteFrame.add(remover);
+                deleteFrame.setLayout(null);
+
                 deleteFrame.setVisible(true);
             }
         });
@@ -326,6 +389,14 @@ public class Ordenador {
                 return true;
         }
         return false;
+    }
+
+    public Praxista getPraxistaByName(String name) {
+        for (int i = 0; i < praxistas.size(); i++) {
+            if (praxistas.get(i).getNome().equals(name))
+                return praxistas.get(i);
+        }
+        return null;
     }
 
 
