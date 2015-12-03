@@ -106,7 +106,7 @@ public class ParseJSON {
                 Hierarquia hierarquia = parseHierarquia(hierarq);
                 Date dataNascimento = parseDataNascimento(dataNasc);
                 if(hierarquia == null || dataNascimento == null){
-                    System.out.println("Erro a parsar o JSON.");
+                    System.out.println(name + " .Erro a parsar o JSON.");
                     return null;
                 }
                 Praxista p = new Praxista(hierarquia,name,primeiraMatricula,dataNascimento);
@@ -124,6 +124,7 @@ public class ParseJSON {
         try {
             return df.parse(dataNasc);
         } catch (ParseException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -194,6 +195,7 @@ public class ParseJSON {
             case "DUX_VETERANORUM":
                 return DUX_VETERANORUM;
             default:
+                System.out.println("Erro a ler hierarquia");
                 return null;
         }
     }
