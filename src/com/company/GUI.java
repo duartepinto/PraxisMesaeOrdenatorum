@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -36,8 +38,13 @@ public class GUI {
 
     JPanel panel = new JPanel(new FlowLayout());
     JFrame frame = new JFrame("Praxis Mesae Ordenatorum");
+
+    JPanel addPanel = new JPanel(new FlowLayout());
     JFrame addFrame = new JFrame("Add Doutor");
+
+    JPanel deletePanel = new JPanel(new FlowLayout());
     JFrame deleteFrame = new JFrame("Delete Doutor");
+
     JButton add = new JButton("Adicionar");
     JButton delete = new JButton("Eliminar");
 
@@ -45,7 +52,7 @@ public class GUI {
     JPanel right = new JPanel();
     JPanel mid = new JPanel();
 
-
+    ArrayList<Praxista> disposicaoMesaVets = new ArrayList<Praxista>();
     ParseJSON parse = new ParseJSON("database.json");
 
     public GUI (Ordenador ord) {
@@ -53,13 +60,11 @@ public class GUI {
     };
 
     public void initComponents() {
+        disposicaoMesaVets = ord.getMesaVets().geraMesa();
 
+        frame.dispose();
         addFrame.dispose();
         deleteFrame.dispose();
-        frame.dispose();
-
-        panel.removeAll();
-        panel.updateUI();
 
         addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addFrame.setBounds(400, 200, 1000, 800);
@@ -82,6 +87,16 @@ public class GUI {
         panel = (JPanel)frame.getContentPane();
         panel.setLayout(null);
 
+        addPanel = (JPanel)addFrame.getContentPane();
+        addPanel.setLayout(null);
+
+        deletePanel = (JPanel)deleteFrame.getContentPane();
+        deletePanel.setLayout(null);
+
+        panel.removeAll();
+        addPanel.removeAll();
+        deletePanel.removeAll();
+
         addLeftRow();
 
         addRightRow();
@@ -89,6 +104,10 @@ public class GUI {
         addCenterRow();
 
         configButtons();
+
+        panel.revalidate();
+        addPanel.revalidate();
+        deletePanel.revalidate();
 
         frame.setBounds(0, 0, (int) width, (int) height);
 
@@ -128,7 +147,8 @@ public class GUI {
     }
 
     public void addCenterRow() {
-        for (int i = 0; i < ord.getMesaVets().getVeteranos().size(); i++) {
+
+        for (int i = 0; i < ord.getMesaVets().getDisposicaoMesaVets().size(); i++) {
             ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
             image.setImage(image.getImage().getScaledInstance((int)width/30, (int)height/15, Image.SCALE_SMOOTH));
 
@@ -219,12 +239,11 @@ public class GUI {
                                     Praxista novo = new Praxista(hier, nome, matricula, data);
                                     //adicionar ao JSON
                                     ord.getPraxistas().add(novo);
-
+                                    setOrdenador();
                                     parse.serialize(ord.getPraxistas());
                                     //voltar a ler o JSON
-                                    ord.setPraxistas(parse.unserialize());
                                     addFrame.setVisible(false);
-                                    //initComponents();
+                                    initComponents();
                                 }
                             }
                         }
@@ -242,16 +261,16 @@ public class GUI {
 
                 adicionar.setBounds(250, 500, 200, 50);
 
-                addFrame.add(nomeDoutor);
-                addFrame.add(textDoutor);
-                addFrame.add(idadeDoutor);
-                addFrame.add(ageDoutor);
-                addFrame.add(matriculaDoutor);
-                addFrame.add(matriDoutor);
-                addFrame.add(hierarqDoutor);
-                addFrame.add(hierDoutor);
-                addFrame.add(adicionar);
-                addFrame.setLayout(null);
+                addPanel.add(nomeDoutor);
+                addPanel.add(textDoutor);
+                addPanel.add(idadeDoutor);
+                addPanel.add(ageDoutor);
+                addPanel.add(matriculaDoutor);
+                addPanel.add(hierarqDoutor);
+                addPanel.add(hierDoutor);
+                addPanel.add(adicionar);
+                addPanel.add(matriDoutor);
+
                 addFrame.setVisible(true);
             }
         });
@@ -283,10 +302,10 @@ public class GUI {
                                 ord.getPraxistas().remove(novo);
                                 ParseJSON parse = new ParseJSON("database.json");
                                 parse.serialize(ord.getPraxistas());
+                                setOrdenador();
                                 //voltar a ler o JSON
-                                ord.setPraxistas(parse.unserialize());
                                 deleteFrame.setVisible(false);
-                                //initComponents();
+                                initComponents();
 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Este praxista não existe.");
@@ -299,10 +318,9 @@ public class GUI {
                 textDoutor.setBounds(600, 100, 100, 30);
                 remover.setBounds(250, 500, 200, 50);
 
-                deleteFrame.add(nomeDoutor);
-                deleteFrame.add(textDoutor);
-                deleteFrame.add(remover);
-                deleteFrame.setLayout(null);
+                deletePanel.add(nomeDoutor);
+                deletePanel.add(textDoutor);
+                deletePanel.add(remover);
 
                 deleteFrame.setVisible(true);
             }
@@ -310,8 +328,15 @@ public class GUI {
 
     }
 
-    private void conditionsForAddPraxista(String name) {
+    private void setOrdenador() {
+        ord = new Ordenador(ord.getPraxistas());
 
+        Collections.sort(ord.getLeftRow());
+        Collections.reverse(ord.getLeftRow());
+        Collections.sort(ord.getRightRow());
+        Collections.reverse(ord.getRightRow());
+
+        disposicaoMesaVets = ord.getMesaVets().geraMesa();
     }
 
 }

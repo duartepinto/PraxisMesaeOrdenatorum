@@ -175,4 +175,12 @@ public class Ordenador {
         this.praxistas = praxistas;
     }
 
+    public void setLeftRow(ArrayList<Praxista> leftRow) { this.leftRow = leftRow;}
+
+    public void setRightRow(ArrayList<Praxista> rightRow) { this.rightRow = rightRow;}
+
+    public void setMesaVets(MesaVeteranos mesaVets) {
+        this.mesaVets = mesaVets;
+    }
+
 }
