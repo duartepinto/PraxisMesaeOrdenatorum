@@ -191,8 +191,12 @@ public class GUI {
                                 }
 
                                 Praxista novo = new Praxista(hier, nome, matricula, data);
-                                //adicionar novo ao JSON
+                                //adicionar ao JSON
+                                ord.getPraxistas().add(novo);
+                                ParseJSON parse = new ParseJSON("database.json");
+                                parse.serialize(ord.getPraxistas());
                                 //voltar a ler o JSON
+                                ord.setPraxistas(parse.unserialize());
                             }
                         }
                     }
@@ -247,7 +251,11 @@ public class GUI {
                                 Praxista novo = ord.getPraxistaByName(textDoutor.getText());
 
                                 //remover novo ao JSON
+                                ord.getPraxistas().remove(novo);
+                                ParseJSON parse = new ParseJSON("database.json");
+                                parse.serialize(ord.getPraxistas());
                                 //voltar a ler o JSON
+                                ord.setPraxistas(parse.unserialize());
 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Este praxista não existe.");

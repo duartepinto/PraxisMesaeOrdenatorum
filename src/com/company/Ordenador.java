@@ -171,4 +171,8 @@ public class Ordenador {
         return mesaVets;
     }
 
+    public void setPraxistas(ArrayList<Praxista> praxistas) {
+        this.praxistas = praxistas;
+    }
+
 }
