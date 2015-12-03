@@ -54,6 +54,13 @@ public class GUI {
 
     public void initComponents() {
 
+        addFrame.dispose();
+        deleteFrame.dispose();
+        frame.dispose();
+
+        panel.removeAll();
+        panel.updateUI();
+
         addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addFrame.setBounds(400, 200, 1000, 800);
 
@@ -166,6 +173,7 @@ public class GUI {
                 adicionar.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        boolean tent = true;
 
                         if (textDoutor.getText().equals("") || ageDoutor.getText().equals("") || matriDoutor.getText().equals("") || hierDoutor.getText().equals("")) {
                             JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
@@ -182,26 +190,42 @@ public class GUI {
                                 try {
                                     data = df.parse(ageDoutor.getText());
                                 } catch (ParseException e1) {
+                                    JOptionPane.showMessageDialog(null, "O formato da data tem de ser yyyy-mm-dd.");
                                     e1.printStackTrace();
+                                    tent = false;
                                 }
 
-                                int matricula = Integer.parseInt(matriDoutor.getText());
+                                int matricula = 0;
+                                try {
+                                    matricula = Integer.parseInt(matriDoutor.getText());
+                                } catch (NumberFormatException n1) {
+                                    JOptionPane.showMessageDialog(null, "O ano da primeira matrícula tem de ser um número (i.e. 2014).");
+                                    n1.printStackTrace();
+                                    tent = false;
+                                }
                                 Hierarquia hier = null;
                                 try {
                                     hier = ParseJSON.parseHierarquia(hierDoutor.getText());
                                 } catch (JSONException e1) {
                                     e1.printStackTrace();
+                                    tent = false;
                                 }
 
-                                Praxista novo = new Praxista(hier, nome, matricula, data);
-                                //adicionar ao JSON
-                                ord.getPraxistas().add(novo);
+                                if (hier == null) {
+                                    JOptionPane.showMessageDialog(null, "A hierarquia tem de ser SEGUNDANISTA, SEMI_PUTO, TERCEIRANISTA, PUTO, QUARTANISTA, DOUTOR_DE_MERDA, QUINTANISTA, MERDA_DE_DOUTOR, VETERANO, DUX_FACULTIS, DUX_VETERANORUM");
+                                    tent = false;
+                                }
+                                if (tent) {
+                                    Praxista novo = new Praxista(hier, nome, matricula, data);
+                                    //adicionar ao JSON
+                                    ord.getPraxistas().add(novo);
 
-                                parse.serialize(ord.getPraxistas());
-                                //voltar a ler o JSON
-                                ord.setPraxistas(parse.unserialize());
-                                //initComponents();
-                                addFrame.setVisible(false);
+                                    parse.serialize(ord.getPraxistas());
+                                    //voltar a ler o JSON
+                                    ord.setPraxistas(parse.unserialize());
+                                    addFrame.setVisible(false);
+                                    //initComponents();
+                                }
                             }
                         }
                     }
@@ -262,6 +286,7 @@ public class GUI {
                                 //voltar a ler o JSON
                                 ord.setPraxistas(parse.unserialize());
                                 deleteFrame.setVisible(false);
+                                //initComponents();
 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Este praxista não existe.");
@@ -282,6 +307,10 @@ public class GUI {
                 deleteFrame.setVisible(true);
             }
         });
+
+    }
+
+    private void conditionsForAddPraxista(String name) {
 
     }
 
