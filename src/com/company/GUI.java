@@ -45,6 +45,9 @@ public class GUI {
     JPanel right = new JPanel();
     JPanel mid = new JPanel();
 
+
+    ParseJSON parse = new ParseJSON("database.json");
+
     public GUI (Ordenador ord) {
         this.ord = ord;
     };
@@ -193,10 +196,12 @@ public class GUI {
                                 Praxista novo = new Praxista(hier, nome, matricula, data);
                                 //adicionar ao JSON
                                 ord.getPraxistas().add(novo);
-                                ParseJSON parse = new ParseJSON("database.json");
+
                                 parse.serialize(ord.getPraxistas());
                                 //voltar a ler o JSON
                                 ord.setPraxistas(parse.unserialize());
+                                //initComponents();
+                                addFrame.setVisible(false);
                             }
                         }
                     }
@@ -256,6 +261,7 @@ public class GUI {
                                 parse.serialize(ord.getPraxistas());
                                 //voltar a ler o JSON
                                 ord.setPraxistas(parse.unserialize());
+                                deleteFrame.setVisible(false);
 
                             } else {
                                 JOptionPane.showMessageDialog(null, "Este praxista não existe.");
