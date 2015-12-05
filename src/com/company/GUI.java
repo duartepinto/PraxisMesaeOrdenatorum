@@ -172,21 +172,33 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar");
+                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar:");
 
                 JTextField textDoutor = new JTextField();
 
-                JLabel idadeDoutor = new JLabel("Nascimento da pessoa que quer adicionar");
+                JLabel idadeDoutor = new JLabel("Nascimento da pessoa que quer adicionar (yyyy-mm-dd):");
 
                 JTextField ageDoutor = new JTextField();
 
-                JLabel matriculaDoutor = new JLabel("Primeira matrícula da pessoa que quer adicionar");
+                JLabel matriculaDoutor = new JLabel("Primeira matrícula da pessoa que quer adicionar:");
 
                 JTextField matriDoutor = new JTextField();
 
-                JLabel hierarqDoutor = new JLabel("Hierarquia da pessoa que quer adicionar");
+                JLabel hierarqDoutor = new JLabel("Hierarquia da pessoa que quer adicionar:");
 
-                JTextField hierDoutor = new JTextField();
+                DefaultComboBoxModel model = new DefaultComboBoxModel();
+                model.addElement("Segundanista");
+                model.addElement("Semi Puto");
+                model.addElement("Terceiranista");
+                model.addElement("Puto");
+                model.addElement("Quartanista");
+                model.addElement("Doutor de Merda");
+                model.addElement("Quintanista");
+                model.addElement("Merda de Doutor");
+                model.addElement("Veterano");
+                model.addElement("Dux Facultis");
+                model.addElement("Dux Veteranorum");
+                JComboBox comboBox = new JComboBox(model);
 
                 JButton adicionar = new JButton("Adicionar");
 
@@ -195,7 +207,7 @@ public class GUI {
                     public void actionPerformed(ActionEvent e) {
                         boolean tent = true;
 
-                        if (textDoutor.getText().equals("") || ageDoutor.getText().equals("") || matriDoutor.getText().equals("") || hierDoutor.getText().equals("")) {
+                        if (textDoutor.getText().equals("") || ageDoutor.getText().equals("") || matriDoutor.getText().equals("")) {
                             JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
                         }
                         else {
@@ -225,7 +237,7 @@ public class GUI {
                                 }
                                 Hierarquia hier = null;
                                 try {
-                                    hier = ParseJSON.parseHierarquia(hierDoutor.getText());
+                                    hier = ParseJSON.parseHierarquia(returnHier((String)comboBox.getSelectedItem()));
                                 } catch (JSONException e1) {
                                     e1.printStackTrace();
                                     tent = false;
@@ -257,9 +269,10 @@ public class GUI {
                 matriculaDoutor.setBounds(100, 300, 400, 30);
                 matriDoutor.setBounds(600, 300, 100, 30);
                 hierarqDoutor.setBounds(100, 400, 400, 30);
-                hierDoutor.setBounds(600, 400, 100, 30);
+                comboBox.setBounds(600, 400, 150, 40);
 
                 adicionar.setBounds(250, 500, 200, 50);
+
 
                 addPanel.add(nomeDoutor);
                 addPanel.add(textDoutor);
@@ -267,7 +280,7 @@ public class GUI {
                 addPanel.add(ageDoutor);
                 addPanel.add(matriculaDoutor);
                 addPanel.add(hierarqDoutor);
-                addPanel.add(hierDoutor);
+                addPanel.add(comboBox);
                 addPanel.add(adicionar);
                 addPanel.add(matriDoutor);
 
@@ -337,6 +350,36 @@ public class GUI {
         Collections.reverse(ord.getRightRow());
 
         disposicaoMesaVets = ord.getMesaVets().geraMesa();
+    }
+
+    private String returnHier(String h) {
+        switch (h) {
+            case "Segundanista":
+                return "SEGUNDANISTA";
+            case "Semi Puto":
+                return "SEMI_PUTO";
+            case "Terceiranista":
+                return "TERCEIRANISTA";
+            case "Puto":
+                return "PUTO";
+            case "Quartanista":
+                return "QUARTANISTA";
+            case "Doutor de Merda":
+                return "DOUTOR_DE_MERDA";
+            case "Quintanista":
+                return "QUINTANISTA";
+            case "Merda de Doutor":
+                return "MERDA_DE_DOUTOR";
+            case "Veterano":
+                return "VETERANO";
+            case "Dux Facultis":
+                return "DUX_FACULTIS";
+            case "Dux Veteranorum":
+                return "DUX_VETERANORUM";
+            default:
+                break;
+        }
+        return new String();
     }
 
 }
