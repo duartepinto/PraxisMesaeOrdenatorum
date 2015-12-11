@@ -62,52 +62,51 @@ public class GUI {
     public void initComponents() {
         disposicaoMesaVets = ord.getMesaVets().geraMesa();
 
-        frame.dispose();
-        addFrame.dispose();
-        deleteFrame.dispose();
+            panel.removeAll();
+            addPanel.removeAll();
+            deletePanel.removeAll();
 
-        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addFrame.setBounds(400, 200, 1000, 800);
+            addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            addFrame.setBounds(400, 200, 1000, 800);
 
-        deleteFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        deleteFrame.setBounds(400, 200, 1000, 800);
+            deleteFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            deleteFrame.setBounds(400, 200, 1000, 800);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
-        image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/20, Image.SCALE_SMOOTH));
-        tamanhoMesaDotWidth = image.getIconWidth();
-        tamanhoMesaDotHeight = image.getIconHeight();
+            ImageIcon image = new ImageIcon(this.getClass().getResource("resources/table_doutores.jpg"));
+            image.setImage(image.getImage().getScaledInstance((int)width/20, (int)height/20, Image.SCALE_SMOOTH));
+            tamanhoMesaDotWidth = image.getIconWidth();
+            tamanhoMesaDotHeight = image.getIconHeight();
 
-        image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
-        image.setImage(image.getImage().getScaledInstance((int)width/30, (int)height/15, Image.SCALE_SMOOTH));
-        tamanhoMesaVetWidth = image.getIconWidth();
-        tamanhoMesaVetHeight = image.getIconHeight();
+            image = new ImageIcon(this.getClass().getResource("resources/table_veteranos.jpg"));
+            image.setImage(image.getImage().getScaledInstance((int)width/30, (int)height/15, Image.SCALE_SMOOTH));
+            tamanhoMesaVetWidth = image.getIconWidth();
+            tamanhoMesaVetHeight = image.getIconHeight();
 
-        panel = (JPanel)frame.getContentPane();
-        panel.setLayout(null);
+            panel = (JPanel)frame.getContentPane();
+            panel.setLayout(null);
 
-        addPanel = (JPanel)addFrame.getContentPane();
-        addPanel.setLayout(null);
+            addPanel = (JPanel)addFrame.getContentPane();
+            addPanel.setLayout(null);
 
-        deletePanel = (JPanel)deleteFrame.getContentPane();
-        deletePanel.setLayout(null);
+            deletePanel = (JPanel)deleteFrame.getContentPane();
+            deletePanel.setLayout(null);
 
-        panel.removeAll();
-        addPanel.removeAll();
-        deletePanel.removeAll();
+            addLeftRow();
 
-        addLeftRow();
+            addRightRow();
 
-        addRightRow();
+            addCenterRow();
 
-        addCenterRow();
+            configButtons();
 
-        configButtons();
-
-        panel.revalidate();
-        addPanel.revalidate();
-        deletePanel.revalidate();
+            panel.validate();
+            panel.repaint();
+            deletePanel.validate();
+            deletePanel.repaint();
+            addPanel.validate();
+            addPanel.repaint();
 
         frame.setBounds(0, 0, (int) width, (int) height);
 
@@ -164,15 +163,15 @@ public class GUI {
     }
 
     public void configButtons() {
-        add.setBounds(1400, 150, 200, 100);
-        delete.setBounds(1400, 275, 200, 100);
+        add.setBounds(mesaEsquerda + ord.getMesaVets().getDisposicaoMesaVets().size() * tamanhoMesaVetWidth + 2 * tamanhoMesaDotWidth + 200, 150, 200, 100);
+        delete.setBounds(mesaEsquerda + ord.getMesaVets().getDisposicaoMesaVets().size() * tamanhoMesaVetWidth + 2 * tamanhoMesaDotWidth + 200, 275, 200, 100);
         panel.add(add);
 
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar:");
+                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar:  ");
 
                 JTextField textDoutor = new JTextField();
 
