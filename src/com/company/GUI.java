@@ -55,12 +55,26 @@ public class GUI {
     ArrayList<Praxista> disposicaoMesaVets = new ArrayList<Praxista>();
     ParseJSON parse = new ParseJSON("database.json");
 
+    /* Conteúdos dos painéis */
+
+    JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar:  ");
+    JTextField textDoutor = new JTextField();
+
+    JLabel idadeDoutor = new JLabel("Nascimento da pessoa que quer adicionar (yyyy-mm-dd):");
+    JTextField ageDoutor = new JTextField();
+
+    JLabel matriculaDoutor = new JLabel("Primeira matrícula da pessoa que quer adicionar:");
+    JTextField matriDoutor = new JTextField();
+
+    JLabel nomeDoutorElim = new JLabel("Nome da pessoa que quer eliminar");
+    JTextField textDoutorElim = new JTextField();
+
     public GUI (Ordenador ord) {
         this.ord = ord;
     };
 
     public void initComponents() {
-        disposicaoMesaVets = ord.getMesaVets().geraMesa();
+            disposicaoMesaVets = ord.getMesaVets().geraMesa();
 
             panel.removeAll();
             addPanel.removeAll();
@@ -171,17 +185,9 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer adicionar:  ");
-
-                JTextField textDoutor = new JTextField();
-
-                JLabel idadeDoutor = new JLabel("Nascimento da pessoa que quer adicionar (yyyy-mm-dd):");
-
-                JTextField ageDoutor = new JTextField();
-
-                JLabel matriculaDoutor = new JLabel("Primeira matrícula da pessoa que quer adicionar:");
-
-                JTextField matriDoutor = new JTextField();
+                textDoutor.setText("");
+                ageDoutor.setText("");
+                matriDoutor.setText("");
 
                 JLabel hierarqDoutor = new JLabel("Hierarquia da pessoa que quer adicionar:");
 
@@ -292,23 +298,19 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-                JLabel nomeDoutor = new JLabel("Nome da pessoa que quer eliminar");
-
-                JTextField textDoutor = new JTextField();
-
+                textDoutorElim.setText("");
                 JButton remover = new JButton("Eliminar");
 
                 remover.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        if (textDoutor.getText().equals("")) {
+                        if (textDoutorElim.getText().equals("")) {
                             JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
                         }
                         else {
-                            if (ord.searchPraxista(textDoutor.getText())) {
-                                Praxista novo = ord.getPraxistaByName(textDoutor.getText());
+                            if (ord.searchPraxista(textDoutorElim.getText())) {
+                                Praxista novo = ord.getPraxistaByName(textDoutorElim.getText());
 
                                 //remover novo ao JSON
                                 ord.getPraxistas().remove(novo);
@@ -326,12 +328,12 @@ public class GUI {
                     }
                 });
 
-                nomeDoutor.setBounds(100, 100, 400, 30);
-                textDoutor.setBounds(600, 100, 100, 30);
+                nomeDoutorElim.setBounds(100, 100, 400, 30);
+                textDoutorElim.setBounds(600, 100, 100, 30);
                 remover.setBounds(250, 500, 200, 50);
 
-                deletePanel.add(nomeDoutor);
-                deletePanel.add(textDoutor);
+                deletePanel.add(nomeDoutorElim);
+                deletePanel.add(textDoutorElim);
                 deletePanel.add(remover);
 
                 deleteFrame.setVisible(true);
