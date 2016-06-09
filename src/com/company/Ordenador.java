@@ -2,9 +2,24 @@ package com.company;
 
 import com.company.models.Hierarquia;
 import com.company.models.Praxista;
+import oracle.jrockit.jfr.JFR;
+import org.json.JSONException;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Duarte on 30/11/2015.
@@ -118,5 +133,54 @@ public class Ordenador {
         int espacamentoInicial = this.maiorNome(leftRow) / 2;
         displayMesaVeteranos(mesaVeteranos, espacamentoInicial);
         displayRows(tamanhoMesaVets, espacamentoInicial);
+
+        GUI gui = new GUI(this);
+
+        gui.initComponents();
     }
+
+    public boolean searchPraxista(String name) {
+        for (int i = 0; i < praxistas.size(); i++) {
+            if (praxistas.get(i).getNome().equals(name))
+                return true;
+        }
+        return false;
+    }
+
+    public Praxista getPraxistaByName(String name) {
+        for (int i = 0; i < praxistas.size(); i++) {
+            if (praxistas.get(i).getNome().equals(name))
+                return praxistas.get(i);
+        }
+        return null;
+    }
+
+    public ArrayList<Praxista> getPraxistas() {
+        return praxistas;
+    }
+
+    public ArrayList<Praxista> getLeftRow() {
+        return leftRow;
+    }
+
+    public ArrayList<Praxista> getRightRow() {
+        return rightRow;
+    }
+
+    public MesaVeteranos getMesaVets() {
+        return mesaVets;
+    }
+
+    public void setPraxistas(ArrayList<Praxista> praxistas) {
+        this.praxistas = praxistas;
+    }
+
+    public void setLeftRow(ArrayList<Praxista> leftRow) { this.leftRow = leftRow;}
+
+    public void setRightRow(ArrayList<Praxista> rightRow) { this.rightRow = rightRow;}
+
+    public void setMesaVets(MesaVeteranos mesaVets) {
+        this.mesaVets = mesaVets;
+    }
+
 }

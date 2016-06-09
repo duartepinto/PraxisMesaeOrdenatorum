@@ -1,9 +1,14 @@
 {"praxistas":[
+	{"name":"Nando", "hierarquia":"VETERANO", "primeiraMatricula":"2005", "dataNascimento":"1988-05-11"},
+	{"name":"Grelhas", "hierarquia":"VETERANO", "primeiraMatricula":"2006", "dataNascimento":"1989-05-11"},
+	{"name":"Io Io", "hierarquia":"VETERANO", "primeiraMatricula":"2007", "dataNascimento":"1990-05-11"},
+	{"name":"Nilton", "hierarquia":"VETERANO", "primeiraMatricula":"2008", "dataNascimento":"1991-05-11"},
+	{"name":"Beigustus", "hierarquia":"VETERANO", "primeiraMatricula":"2007", "dataNascimento":"1992-10-11"},
 	{"name":"Quina", "hierarquia":"SEMI_PUTO", "primeiraMatricula":"2014", "dataNascimento":"2013-05-11"},
 	{"name":"Smurf", "hierarquia":"SEMI_PUTO", "primeiraMatricula":"2014", "dataNascimento":"2013-05-11"},
 	{"name":"SPDE", "hierarquia":"SEMI_PUTO", "primeiraMatricula":"2014", "dataNascimento":"2013-05-11"},
 	{"name":"CC", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"1994-12-15"},
 	{"name":"Pipoca", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"},
 	{"name":"Pauta", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"},
-	{"name":"Poncho", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"},
+	{"name":"Poncho", "hierarquia":"PUTO", "primeiraMatricula":"2013", "dataNascimento":"2013-05-11"}
 ]}
